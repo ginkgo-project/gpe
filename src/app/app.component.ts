@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  plot_type: string = "performance plot";
+  plot_data: string[] = ["block_jacobi", "adaptive_block_jacobi"];
 }

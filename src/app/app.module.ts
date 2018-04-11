@@ -3,11 +3,17 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { DataSelectorComponent } from './data-selector/data-selector.component';
+import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
+import { PlotViewComponent } from './plot-view/plot-view.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DataSelectorComponent,
+    PlotSelectorComponent,
+    PlotViewComponent
   ],
   imports: [
     BrowserModule
