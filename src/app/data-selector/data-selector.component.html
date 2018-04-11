@@ -1,3 +1,18 @@
-<p>
-  data-selector works!
-</p>
+<div>
+  <label>
+    Data location:
+    <input type="url" value="{{data_location}}">
+  </label>
+  <span class="error">{{error_message}}</span>
+</div>
+<div><label>
+    Data files (use <code>CTRL + &lt;click&gt;</code> to select multiple
+    files):
+</label></div>
+<div>
+  <select multiple>
+    <option *ngFor="let data_file of data_file_list" value="{{data_file}}">
+      {{data_file}}
+    </option>
+  </select>
+</div>

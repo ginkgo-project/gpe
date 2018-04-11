@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
 import { PlotViewComponent } from './plot-view/plot-view.component';
+import { KeysPipe } from './keys.pipe';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { PlotViewComponent } from './plot-view/plot-view.component';
     AppComponent,
     DataSelectorComponent,
     PlotSelectorComponent,
-    PlotViewComponent
+    PlotViewComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule

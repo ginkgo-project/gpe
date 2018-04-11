@@ -1,3 +1,18 @@
-<p>
-  plot-view works!
-</p>
+<h2>Showing {{plot_script.name}} for <code>{{ plot_data | keys }}</code></h2>
+<div>
+  <span>
+    <strong>TODO:</strong> use <code>Chart.js</code> to display data.
+  </span>
+  <div>
+    <span>Data:</span>
+    <code>
+      <pre>{{plot_data | json}}</pre>
+    </code>
+  </div>
+  <div>
+    <span>Plot script:</span>
+    <code>
+      <pre>{{plot_script | json}}</pre>
+    </code>
+  </div>
+</div>

@@ -12,4 +12,10 @@ export class PlotSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
+  plot_data_location: string = 'https://www.example.com';
+
+  plot_file_list: string[] = [
+    'problem_size_vs_performance.js',
+    'block_size_vs_performance.js'
+  ];
 }

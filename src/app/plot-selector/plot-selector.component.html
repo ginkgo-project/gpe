@@ -1,3 +1,17 @@
-<p>
-  plot-selector works!
-</p>
+<div>
+  <label>
+    Plot data location:
+    <input type="url" value="{{plot_data_location}}">
+  </label>
+  <span class="error">{{error_message}}</span>
+</div>
+<div>
+  <label>
+    Plot file:
+    <select>
+      <option *ngFor="let plot_file of plot_file_list" value="{{plot_file}}">
+        {{plot_file}}
+      </option>
+    </select>
+  </label>
+</div>
