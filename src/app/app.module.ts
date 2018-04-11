@@ -6,7 +6,10 @@ import { AppComponent } from './app.component';
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
 import { PlotViewComponent } from './plot-view/plot-view.component';
+import { PlotConfigService } from './plot-config.service';
+import { PlotDataService } from './plot-data.service'
 import { KeysPipe } from './keys.pipe';
+import { PropertyPipe } from './property.pipe';
 
 
 @NgModule({
@@ -15,12 +18,16 @@ import { KeysPipe } from './keys.pipe';
     DataSelectorComponent,
     PlotSelectorComponent,
     PlotViewComponent,
-    KeysPipe
+    KeysPipe,
+    PropertyPipe
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    PlotConfigService,
+    PlotDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+
+
 import { KeysPipe } from '../keys.pipe';
+import { PropertyPipe } from '../property.pipe';
+import { PlotScript } from '../plot-script';
+import { DataFile } from '../data-file';
+import { PlotConfigService } from '../plot-config.service';
+import { PlotDataService } from '../plot-data.service'
 
 
 @Component({
@@ -10,18 +17,34 @@ import { KeysPipe } from '../keys.pipe';
 })
 export class PlotViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private configService: PlotConfigService,
+    private dataService: PlotDataService
+  ) { }
 
   ngOnInit() {
   }
 
-  plot_data = {
-    'adaptive_block_jacobi.json' : {
-      'double': [2, 3, 4],
-      'single': [5, 6, 7],
-      'more_dummy_data': [8, 9, 1]
-    }
-  };
+  @Input()
+  set data_files(data_files: string[]) {
+    this.dataService.getDataFiles(data_files)
+      .subscribe(data => this.data = data);
+  }
 
-  plot_script = { 'name': 'performance', 'code': 'var i = 10; i = i + 5;' };
+  get data_files(): string[] {
+    return this.data.map(file => file.name);
+  }
+
+  @Input()
+  set script_name(script_name) {
+    this.configService.getPlotScript(script_name)
+      .subscribe(script => this.script = script);
+  }
+
+  get script_name(): string {
+    return this.script.name;
+  }
+
+  data: DataFile[];
+  script: PlotScript;
 }

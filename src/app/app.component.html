@@ -1,17 +1,24 @@
 <article>
   <h1>Ginkgo Data Explorer</h1>
 
-  <section>
-    <app-plot-view></app-plot-view>
+  <section *ngIf="plot_data && plot_data.length && plot_script">
+    <app-plot-view
+      [data_files]="plot_data"
+      [script_name]="plot_script"
+    ></app-plot-view>
   </section>
 
   <section>
     <h2>Data selection</h2>
-    <app-data-selector></app-data-selector>
+    <app-data-selector
+      (onDataUpdate)="plot_data = $event;"
+    ></app-data-selector>
   </section>
 
   <section>
     <h2>Plot selection</h2>
-    <app-plot-selector></app-plot-selector>
+    <app-plot-selector
+      (onPlotUpdate)="plot_script = $event;"
+    ></app-plot-selector>
   </section>
 </article>

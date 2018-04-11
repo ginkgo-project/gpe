@@ -1,4 +1,4 @@
-<h2>Showing {{plot_script.name}} for <code>{{ plot_data | keys }}</code></h2>
+<h2>Showing {{script.name}} for <code>{{ data | property: 'name' }}</code></h2>
 <div>
   <span>
     <strong>TODO:</strong> use <code>Chart.js</code> to display data.
@@ -6,13 +6,13 @@
   <div>
     <span>Data:</span>
     <code>
-      <pre>{{plot_data | json}}</pre>
+      <pre>{{data | json}}</pre>
     </code>
   </div>
   <div>
     <span>Plot script:</span>
     <code>
-      <pre>{{plot_script | json}}</pre>
+      <pre>{{script | json}}</pre>
     </code>
   </div>
 </div>

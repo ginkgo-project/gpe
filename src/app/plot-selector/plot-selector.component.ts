@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+
+
+import { PlotConfigService } from '../plot-config.service';
+
 
 @Component({
   selector: 'app-plot-selector',
@@ -7,15 +15,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlotSelectorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private configService: PlotConfigService) { }
+
+  @Output() onPlotUpdate = new EventEmitter<string>();
 
   ngOnInit() {
+    this.updatePlotFileList();
+    this.plot_file_url = this.configService.url;
   }
 
-  plot_data_location: string = 'https://www.example.com';
+  updatePlotFileList(): void {
+    this.configService.getScriptList()
+      .subscribe(list => this.plot_file_list = list);
+  }
 
-  plot_file_list: string[] = [
-    'problem_size_vs_performance.js',
-    'block_size_vs_performance.js'
-  ];
+  updateUrl(): void {
+    this.configService.url = this.plot_file_url;
+    this.updatePlotFileList();
+  }
+
+  emitPlotUpdate(selectedScript: HTMLSelectElement): void {
+    console.log(selectedScript);
+    let options = selectedScript.selectedOptions;
+    if (options.length && options.item(0).value) {
+      console.log(options.item(0));
+      this.onPlotUpdate.emit(options.item(0).value);
+    }
+  }
+
+  plot_file_url: string;
+  plot_file_list: string[];
 }

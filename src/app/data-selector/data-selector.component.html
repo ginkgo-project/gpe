@@ -1,8 +1,9 @@
 <div>
   <label>
     Data location:
-    <input type="url" value="{{data_location}}">
+    <input type="url" value="{{data_file_url}}">
   </label>
+  <button (click)="updateUrl();">Update</button>
   <span class="error">{{error_message}}</span>
 </div>
 <div><label>
@@ -10,7 +11,7 @@
     files):
 </label></div>
 <div>
-  <select multiple>
+  <select multiple #dataList (change)="emitDataUpdate(dataList)">
     <option *ngFor="let data_file of data_file_list" value="{{data_file}}">
       {{data_file}}
     </option>

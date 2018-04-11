@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+
+
+import { PlotDataService } from '../plot-data.service';
+
 
 @Component({
   selector: 'app-data-selector',
@@ -7,18 +15,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataSelectorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService : PlotDataService) { }
+
+  @Output() onDataUpdate = new EventEmitter<string[]>();
 
   ngOnInit() {
+    this.updateDataFileList();
+    this.data_file_url = this.dataService.url;
   }
 
-  data_location: string = 'https://www.example.com';
+  updateDataFileList(): void {
+    this.dataService.getFileList()
+      .subscribe(list => this.data_file_list = list);
+  }
 
-  data_file_list: string[] = [
-    "block_jacobi.json",
-    "adaptive_block_jacobi.json",
-    "adaptive_block_jacobi_col_major.json",
-    "adaptive_block_jacobi_block_interleaved.json",
-    "adaptive_block_jacobi_no_padding.json"
-  ];
+  updateUrl(): void {
+    this.dataService.url = this.data_file_url;
+    this.updateDataFileList();
+  }
+
+  emitDataUpdate(dataList: HTMLSelectElement): void {
+    console.log(dataList);
+    let data: string[] = Array.from(dataList.selectedOptions)
+      .map(option => option.value);
+    console.log(data);
+    this.onDataUpdate.emit(data);
+  }
+
+  data_file_url: string;
+
+  data_file_list: string[];
 }
