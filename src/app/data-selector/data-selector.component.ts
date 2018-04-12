@@ -40,7 +40,7 @@ export class DataSelectorComponent implements OnInit {
     this.onDataUpdate.emit(data);
   }
 
+  error_message: string;
   data_file_url: string;
-
   data_file_list: string[];
 }

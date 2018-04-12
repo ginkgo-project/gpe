@@ -41,6 +41,7 @@ export class PlotSelectorComponent implements OnInit {
     }
   }
 
+  error_message: string;
   plot_file_url: string;
   plot_file_list: string[];
 }
