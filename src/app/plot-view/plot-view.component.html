@@ -4,15 +4,14 @@
     <strong>TODO:</strong> use <code>Chart.js</code> to display data.
   </span>
   <div>
-    <span>Data:</span>
-    <code>
-      <pre>{{data | json}}</pre>
-    </code>
+    <h3>Data:</h3>
+    <div class="code_viewer"><code>{{data | json}}</code></div>
   </div>
   <div>
-    <span>Plot script:</span>
-    <code>
-      <pre>{{script | json}}</pre>
-    </code>
+    <h3>Plot script {{script.name}} (<code>{{script.file}}</code>):</h3>
+    <div class="code_viewer"><code>{{script.code}}</code></div>
   </div>
+  <div>
+    <h3>Plot data</h3>
+    <div class="code_viewer"><code>{{plotData | json}}</code></div>
 </div>

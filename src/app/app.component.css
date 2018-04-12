@@ -1,0 +1,9 @@
+.selector {
+  width: 49%;
+  float: left;
+  display: inline;
+}
+
+hr {
+  clear: both;
+}

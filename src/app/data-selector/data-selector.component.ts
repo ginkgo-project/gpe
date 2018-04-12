@@ -35,10 +35,8 @@ export class DataSelectorComponent implements OnInit {
   }
 
   emitDataUpdate(dataList: HTMLSelectElement): void {
-    console.log(dataList);
     let data: string[] = Array.from(dataList.selectedOptions)
       .map(option => option.value);
-    console.log(data);
     this.onDataUpdate.emit(data);
   }
 

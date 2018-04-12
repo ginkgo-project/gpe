@@ -1,0 +1,10 @@
+.code_viewer {
+  height: 300px;
+  max-height: 300px;
+  overflow-y: scroll;
+  border: 1px solid;
+}
+
+.code_viewer > code {
+  white-space: pre-wrap;
+}

@@ -35,10 +35,8 @@ export class PlotSelectorComponent implements OnInit {
   }
 
   emitPlotUpdate(selectedScript: HTMLSelectElement): void {
-    console.log(selectedScript);
     let options = selectedScript.selectedOptions;
     if (options.length && options.item(0).value) {
-      console.log(options.item(0));
       this.onPlotUpdate.emit(options.item(0).value);
     }
   }

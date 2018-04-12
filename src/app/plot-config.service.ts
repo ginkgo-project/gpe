@@ -1,38 +1,37 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { tap, map } from 'rxjs/operators';
 
 
 import { PlotScript } from './plot-script';
 
 
-// TODO: replace with real data
-const SCRIPTS = {
-  performance: {
-    name: 'performance',
-    code: '<<code for performance plot>>'
-  },
-  bandwidth: {
-    name: 'bandwidth',
-    code: '<<code for bandwidth plot>>'
-  }
-};
-
-
 @Injectable()
 export class PlotConfigService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getPlotScript(script_name: string): Observable<PlotScript> {
-    return of(SCRIPTS[script_name]);
+    let script: PlotScript =
+      this.scripts.find(script => script.name == script_name);
+    return this.http.get(this.url + '/' + script.file, {responseType: 'text'})
+      .pipe(map(code => { script.code = code; return script; }));
   }
 
   getScriptList(): Observable<string[]> {
-    return of(Object.keys(SCRIPTS));
+    return this.http.get<PlotScript[]>(this.url + '/list.json')
+      .pipe(
+        tap(response => this.scripts = response),
+        map(response => response.map(item => item.name))
+      );
   }
 
-  url: string = 'https://www.example.com';
+  url: string =
+    'https://raw.githubusercontent.com/gflegar/ginkgo-data/master/plots';
+
+  scripts: PlotScript[];
 }
