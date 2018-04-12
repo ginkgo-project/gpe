@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+
+
+import { Chart } from 'chart.js';
 
 
 import { KeysPipe } from '../keys.pipe';
@@ -16,6 +19,7 @@ import { PlotDataService } from '../plot-data.service'
   styleUrls: ['./plot-view.component.css']
 })
 export class PlotViewComponent implements OnInit {
+  @ViewChild('chartCanvas') chartCanvas;
 
   constructor(
     private configService: PlotConfigService,
@@ -54,7 +58,7 @@ export class PlotViewComponent implements OnInit {
   updatePlot(): void {
     // TODO: change implementation of this method once updated script files are
     //       available
-    window.chartColors = {
+    (window as any).chartColors = {
       red: 'rgb(255, 99, 132)',
       orange: 'rgb(255, 159, 64)',
       yellow: 'rgb(255, 205, 86)',
@@ -65,12 +69,24 @@ export class PlotViewComponent implements OnInit {
     };
     let generator = new Function(this.script.code + "return process_data;");
     let generateConfig = generator();
-    this.plotData = generateConfig(this.data[0].content);
+    if (this.data[0]) {
+      this.plotData = generateConfig(this.data[0].content);
+      this.redrawPlot();
+    }
+  }
+
+  redrawPlot(): void {
+    if (this.plot) {
+      this.plot.destroy();
+    }
+    let ctx = this.chartCanvas.nativeElement.getContext("2d");
+    let copy = JSON.parse(JSON.stringify(this.plotData));
+    this.plot = new Chart(ctx, copy);
   }
 
   data: DataFile[] = [];
-
   script: PlotScript = new PlotScript();
-
   plotData: any;
+  plot: Chart;
+  verbose: boolean = false;
 }

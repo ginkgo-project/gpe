@@ -1,9 +1,14 @@
-.selector {
-  width: 49%;
+.selectors {
+  width: 24%;
   float: left;
   display: inline;
+  background: #EEE;
+  padding: 5px;
 }
 
-hr {
-  clear: both;
+.main_view {
+  float: right;
+  display: inline;
+  padding: 5px;
+  width: 74%;
 }

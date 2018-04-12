@@ -1,8 +1,10 @@
 <h2>Showing {{script.name}} for <code>{{ data | property: 'name' }}</code></h2>
-<div>
-  <span>
-    <strong>TODO:</strong> use <code>Chart.js</code> to display data.
-  </span>
+<div class="plot">
+  <canvas #chartCanvas></canvas>
+</div>
+
+<button (click)="verbose = !verbose;">Toggle Verbose</button>
+<div *ngIf="verbose">
   <div>
     <h3>Data:</h3>
     <div class="code_viewer"><code>{{data | json}}</code></div>
@@ -14,4 +16,5 @@
   <div>
     <h3>Plot data</h3>
     <div class="code_viewer"><code>{{plotData | json}}</code></div>
+  </div>
 </div>

@@ -1,0 +1,21 @@
+label {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  display: block;
+}
+
+input {
+  display: block;
+  float: left;
+  width: 80%;
+}
+
+button {
+  display: block;
+  width: 19%;
+}
+
+select {
+  width: 100%;
+}

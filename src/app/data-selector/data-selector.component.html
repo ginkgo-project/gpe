@@ -1,8 +1,6 @@
 <div>
-  <label>
-    Plot data location:
-    <input type="url" value="{{data_file_url}}">
-  </label>
+  <label>Plot data location:</label>
+  <input type="url" [(ngModel)]="data_file_url">
   <button (click)="updateUrl();">Update</button>
   <span class="error">{{error_message}}</span>
 </div>

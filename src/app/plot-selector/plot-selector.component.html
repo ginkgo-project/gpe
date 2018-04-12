@@ -1,8 +1,6 @@
 <div>
-  <label>
-    Plot script location:
-    <input type="url" value="{{plot_file_url}}">
-  </label>
+  <label>Plot script location:</label>
+  <input type="url" [(ngModel)]="plot_file_url">
   <button (click)="updateUrl();">Update</button>
   <span class="error">{{error_message}}</span>
 </div>
