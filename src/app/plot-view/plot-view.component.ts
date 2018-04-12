@@ -56,23 +56,9 @@ export class PlotViewComponent implements OnInit {
   }
 
   updatePlot(): void {
-    // TODO: change implementation of this method once updated script files are
-    //       available
-    (window as any).chartColors = {
-      red: 'rgb(255, 99, 132)',
-      orange: 'rgb(255, 159, 64)',
-      yellow: 'rgb(255, 205, 86)',
-      green: 'rgb(75, 192, 192)',
-      blue: 'rgb(54, 162, 235)',
-      purple: 'rgb(153, 102, 255)',
-      grey: 'rgb(201, 203, 207)'
-    };
-    let generator = new Function(this.script.code + "return process_data;");
-    let generateConfig = generator();
-    if (this.data[0]) {
-      this.plotData = generateConfig(this.data[0].content);
-      this.redrawPlot();
-    }
+    let generator: any = (new Function(this.script.code))();
+    this.plotData = generator.generate_plot_data(this.data);
+    this.redrawPlot();
   }
 
   redrawPlot(): void {

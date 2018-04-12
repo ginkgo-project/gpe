@@ -12,3 +12,18 @@
   padding: 5px;
   width: 74%;
 }
+
+.logo {
+  padding-right: 5px;
+  display: block;
+  float: left;
+  height: 40px;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+h1 > span {
+  display: block;
+}

@@ -16,7 +16,10 @@
   </section>
 
   <section class="main_view">
-    <h1>Ginkgo Data Explorer</h1>
+    <h1>
+      <img class="logo" alt="Ginkgo" src="assets/logo.png">
+      <span>Data Explorer</span>
+    </h1>
     <app-plot-view
       *ngIf="plot_data && plot_data.length && plot_script"
       [data_files]="plot_data"
