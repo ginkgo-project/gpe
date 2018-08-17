@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
 
 
 import { PlotConfigService } from '../plot-config.service';

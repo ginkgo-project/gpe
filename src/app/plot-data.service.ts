@@ -2,11 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { tap, map } from 'rxjs/operators';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/toArray';
+import { Observable, of, merge } from 'rxjs';
+import { tap, map, toArray } from 'rxjs/operators';
 
 
 import { DataFile} from './data-file';
@@ -22,7 +19,7 @@ export class PlotDataService {
       .filter(file => names.includes(file.name))
       .map(file => this.http.get<any>(this.url + '/' + file.file)
         .pipe(map(data => { file.content = data; return file; })));
-    return Observable.merge(...fetches).toArray();
+    return merge(...fetches).pipe(toArray());
   }
 
   getFileList(): Observable<string[]> {
