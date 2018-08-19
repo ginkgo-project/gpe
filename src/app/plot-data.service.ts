@@ -31,7 +31,7 @@ export class PlotDataService {
   }
 
   url: string =
-    'https://raw.githubusercontent.com/gflegar/ginkgo-data/master/data';
+    'https://raw.githubusercontent.com/ginkgo-project/ginkgo-data/master/data';
 
   dataFiles: DataFile[];
 }

@@ -30,7 +30,7 @@ export class PlotConfigService {
   }
 
   url: string =
-    'https://raw.githubusercontent.com/gflegar/ginkgo-data/master/plots';
+    'https://raw.githubusercontent.com/ginkgo-project/ginkgo-data/master/plots';
 
   scripts: PlotScript[];
 }
