@@ -14,4 +14,10 @@
       </option>
     </select>
   </label>
+  <label>
+    <a href="https://docs.jsonata.org">JSONata script</a>
+    <textarea #jsonataScript (input)="emitJsonataScriptUpdate(jsonataScript)"
+       rows=20>
+content.data[block_size=32].{"x": num_blocks, "y": num_cols}</textarea>
+  </label>
 </div>

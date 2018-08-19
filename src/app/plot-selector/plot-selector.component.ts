@@ -17,6 +17,7 @@ export class PlotSelectorComponent implements OnInit {
   constructor(private configService: PlotConfigService) { }
 
   @Output() onPlotUpdate = new EventEmitter<string>();
+  @Output() onJsonataScriptUpdate = new EventEmitter<string>();
 
   ngOnInit() {
     this.updatePlotFileList();
@@ -38,6 +39,10 @@ export class PlotSelectorComponent implements OnInit {
     if (options.length && options.item(0).value) {
       this.onPlotUpdate.emit(options.item(0).value);
     }
+  }
+
+  emitJsonataScriptUpdate(jsonataScript: HTMLTextAreaElement): void {
+    this.onJsonataScriptUpdate.emit(jsonataScript.value);
   }
 
   error_message: string;

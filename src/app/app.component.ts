@@ -9,4 +9,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   plot_data: string[];
   plot_script: string;
+  jsonataScript: string;
 }

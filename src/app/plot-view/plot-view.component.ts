@@ -3,6 +3,7 @@ import { JsonPipe } from '@angular/common';
 
 
 import { Chart } from 'chart.js';
+import * as jsonata from 'jsonata';
 
 
 import { KeysPipe } from '../keys.pipe';
@@ -55,7 +56,21 @@ export class PlotViewComponent implements OnInit {
     return this.script.name;
   }
 
+  @Input()
+  set jsonataScript(jsonataScript: string) {
+    this.jsonataScript_ = jsonataScript;
+    this.updatePlot();
+  }
+
+  get jsonataScript(): string {
+    return this.jsonataScript_;
+  }
+
   updatePlot(): void {
+    console.log("got script: " + this.jsonataScript_);
+    // let expression = jsonata("x");
+    // let parsed = expression.evaluate([{"x": 15}, {"x" : 22}]);
+    // console.log(parsed);
     let generator: any = (new Function(this.script.code))();
     this.plotData = generator.generate_plot_data(this.data);
     this.redrawPlot();
@@ -72,6 +87,7 @@ export class PlotViewComponent implements OnInit {
 
   data: DataFile[] = [];
   script: PlotScript = new PlotScript();
+  jsonataScript_: string;
   plotData: any;
   plot: Chart;
   verbose: boolean = false;
