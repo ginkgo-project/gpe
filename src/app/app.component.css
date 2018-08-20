@@ -1,29 +1,15 @@
-.selectors {
-  width: 24%;
-  float: left;
-  display: inline;
-  background: #EEE;
-  padding: 5px;
+.root {
+  height: 100%;
+  width: 100%;
 }
 
-.main_view {
-  float: right;
-  display: inline;
-  padding: 5px;
-  width: 74%;
+mat-card {
+  margin: 0.5em;
 }
 
 .logo {
   padding-right: 5px;
   display: block;
   float: left;
-  height: 40px;
-}
-
-h1 {
-  font-size: 35px;
-}
-
-h1 > span {
-  display: block;
+  height: 30px;
 }

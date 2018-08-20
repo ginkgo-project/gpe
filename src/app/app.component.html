@@ -1,31 +1,32 @@
-<article>
-  <section class="selectors">
-    <div class="selector first_selector">
-      <h2>Data selection</h2>
+<div class="root" fxLayout="column">
+  <mat-toolbar color="primary">
+    <span>
+      <img class="logo" alt="Ginkgo" src="assets/logo.png">
+      Benchmark Explorer
+    </span>
+  </mat-toolbar>
+
+  <div fxFlex fxLayout>
+    <mat-card fxFlex>
       <app-data-selector
         (onDataUpdate)="plot_data = $event;"
       ></app-data-selector>
-    </div>
+    </mat-card>
 
-    <div class="selector">
-      <h2>Plot selection</h2>
-      <app-plot-selector
-        (onPlotUpdate)="plot_script = $event;"
-        (onJsonataScriptUpdate)="jsonataScript = $event"
-      ></app-plot-selector>
-    </div>
-  </section>
+    <div fxFlex fxLayout="column">
+      <mat-card fxFlex>
+        <app-plot-selector
+          (onPlotUpdate)="plot_script = $event;"
+          (onJsonataScriptUpdate)="jsonataScript = $event"
+        ></app-plot-selector>
+      </mat-card>
 
-  <section class="main_view">
-    <h1>
-      <img class="logo" alt="Ginkgo" src="assets/logo.png">
-      <span>Data Explorer</span>
-    </h1>
-    <app-plot-view
-      *ngIf="plot_data && plot_data.length && plot_script || jsonataScript"
-      [data_files]="plot_data"
-      [script_name]="plot_script"
-      [jsonataScript]="jsonataScript"
-    ></app-plot-view>
-  </section>
-</article>
+      <mat-card fxFlex>
+        <app-plot-view
+          [data_files]="plot_data"
+          [script_name]="plot_script"
+          [jsonataScript]="jsonataScript"
+        ></app-plot-view>
+      </mat-card>
+    </div>
+</div>
