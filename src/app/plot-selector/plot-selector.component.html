@@ -16,8 +16,70 @@
   </label>
   <label>
     <a href="https://docs.jsonata.org">JSONata script</a>
-    <textarea #jsonataScript (input)="emitJsonataScriptUpdate(jsonataScript)"
-       rows=20>
-content.data[block_size=32].{"x": num_blocks, "y": num_cols}</textarea>
+    <button (click)="emitJsonataScriptUpdate(jsonataScript)">
+      Update plot
+    </button>
+    <textarea #jsonataScript rows=20>
+{
+  "type": "line",
+  "data": {
+    "labels": [1, 2, 3, 4, 5],
+    "datasets": [
+      {
+        "label": "Red line",
+        "data": [1, 4, 9, 16, 25],
+        "backgroundColor": "hsl(0,50%,60%)",
+        "borderColor": "hsl(0,50%,60%)",
+        "fill": false
+      },
+      {
+        "label": "Green line",
+        "data": [1, 2, 4, 8, 16],
+        "backgroundColor": "hsl(120, 50%, 60%)",
+        "borderColor": "hsl(120, 50%, 60%)",
+        "fill": false
+      }
+    ]
+  },
+  "options": {
+    "responsive": true,
+    "title": {
+      "display": true,
+      "text": "My Plot"
+    },
+    "tooltips": {
+      "mode": "index",
+      "intersect": true
+    },
+    "hover": {
+      "mode": "nearest",
+      "intersect": true
+    },
+    "scales": {
+      "xAxes": [
+        {
+          "display": true,
+          "scaleLabel": {
+            "display": true,
+            "labelString": "X-label"
+          }
+        }
+      ],
+      "yAxes": [
+        {
+          "display": true,
+          "scaleLabel": {
+            "display": true,
+            "labelString": "Y-label"
+          },
+          "ticks": {
+            "min": 0
+          }
+        }
+      ]
+    }
+  }
+}
+    </textarea>
   </label>
 </div>

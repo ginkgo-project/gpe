@@ -67,12 +67,23 @@ export class PlotViewComponent implements OnInit {
   }
 
   updatePlot(): void {
-    console.log("got script: " + this.jsonataScript_);
-    // let expression = jsonata("x");
-    // let parsed = expression.evaluate([{"x": 15}, {"x" : 22}]);
-    // console.log(parsed);
-    let generator: any = (new Function(this.script.code))();
-    this.plotData = generator.generate_plot_data(this.data);
+    if (!(this.script.code || this.jsonataScript_) || !this.data) {
+      return;
+    }
+    if (this.jsonataScript_) {
+      console.log("got script: " + this.jsonataScript_);
+      let expression = jsonata(this.jsonataScript_);
+      try {
+        let parsed = jsonata(this.jsonataScript_).evaluate(this.data);
+        console.log(parsed);
+        this.plotData = this.json2chart(parsed);
+      } catch(e) {
+        console.log(e);
+      }
+    } else {
+      let generator: any = (new Function(this.script.code))();
+      this.plotData = generator.generate_plot_data(this.data);
+    }
     this.redrawPlot();
   }
 
@@ -84,6 +95,8 @@ export class PlotViewComponent implements OnInit {
     let copy = JSON.parse(JSON.stringify(this.plotData));
     this.plot = new Chart(ctx, copy);
   }
+
+  json2chart(json: any): any { return json; }
 
   data: DataFile[] = [];
   script: PlotScript = new PlotScript();

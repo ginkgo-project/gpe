@@ -22,11 +22,10 @@
       <span>Data Explorer</span>
     </h1>
     <app-plot-view
-      *ngIf="plot_data && plot_data.length && plot_script"
+      *ngIf="plot_data && plot_data.length && plot_script || jsonataScript"
       [data_files]="plot_data"
       [script_name]="plot_script"
       [jsonataScript]="jsonataScript"
     ></app-plot-view>
   </section>
-
 </article>
