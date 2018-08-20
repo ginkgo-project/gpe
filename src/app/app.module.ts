@@ -11,6 +11,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatSelectModule,
+  MatTabsModule,
   MatToolbarModule,
 } from '@angular/material';
 // import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,6 +51,7 @@ import { PropertyPipe } from './property.pipe';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatTabsModule,
     MatToolbarModule
   ],
   providers: [

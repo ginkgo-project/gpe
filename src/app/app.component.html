@@ -7,47 +7,51 @@
   </mat-toolbar>
 
   <div fxFlex fxLayout>
-    <mat-card fxFlex>
-      <mat-card-header>
-        <div mat-card-avatar>
-          <mat-icon aria-hidden="true">cloud_download</mat-icon>
-        </div>
-        <mat-card-title>
-          <strong>Step 1:</strong> Select benchmark results</mat-card-title>
-        <mat-card-subtitle>
-          Select raw benchmark results to import and view.
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-divider></mat-divider>
-      <app-data-selector
-        (onDataUpdate)="plot_data = $event;"
-      ></app-data-selector>
-    </mat-card>
-
     <div fxFlex fxLayout="column">
-      <mat-card fxFlex>
+      <mat-card>
         <mat-card-header>
           <div mat-card-avatar>
-            <mat-icon aria-hidden="true">edit</mat-icon>
+            <mat-icon aria-hidden="true">cloud_download</mat-icon>
           </div>
           <mat-card-title>
-            <strong>Step 2:</strong> Transform results</mat-card-title>
+            <strong>Step 1:</strong> Select benchmark results</mat-card-title>
           <mat-card-subtitle>
-            Use <a href="https://docs.jsonata.org">JSONata</a> to
-            extract interesting parts of raw data.
-            For plotting, create a
-            <a href="https://www.chartjs.org/docs/latest/getting-started/usage.html">
-              Chart.js config object</a>.
+            Select raw benchmark results to import and view.
           </mat-card-subtitle>
         </mat-card-header>
         <mat-divider></mat-divider>
-        <app-plot-selector
+        <app-data-selector
+          (onDataUpdate)="plot_data = $event;"
+        ></app-data-selector>
+      </mat-card>
+
+      <mat-card fxFlex fxLayout="column">
+        <div class="force-no-flex">
+          <mat-card-header>
+            <div mat-card-avatar>
+              <mat-icon aria-hidden="true">edit</mat-icon>
+            </div>
+            <mat-card-title>
+              <strong>Step 2:</strong> Transform results</mat-card-title>
+            <mat-card-subtitle>
+              Use <a href="https://docs.jsonata.org">JSONata</a> to
+              extract interesting parts of raw data.
+              For plotting, create a
+              <a href="https://www.chartjs.org/docs/latest/getting-started/usage.html">
+                Chart.js config object</a>.
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+        </div>
+        <app-plot-selector fxFlex
           (onPlotUpdate)="plot_script = $event;"
           (onJsonataScriptUpdate)="jsonataScript = $event"
         ></app-plot-selector>
       </mat-card>
+    </div>
 
-      <mat-card fxFlex>
+    <mat-card fxFlex fxLayout="column">
+      <div class="force-no-flex">
         <mat-card-header>
           <div mat-card-avatar>
             <mat-icon aria-hidden="true">show_chart</mat-icon>
@@ -59,11 +63,11 @@
           </mat-card-subtitle>
         </mat-card-header>
         <mat-divider></mat-divider>
-        <app-plot-view
-          [data_files]="plot_data"
-          [script_name]="plot_script"
-          [jsonataScript]="jsonataScript"
-        ></app-plot-view>
-      </mat-card>
-    </div>
+      </div>
+      <app-plot-view fxFlex
+        [data_files]="plot_data"
+        [script_name]="plot_script"
+        [jsonataScript]="jsonataScript"
+      ></app-plot-view>
+    </mat-card>
 </div>

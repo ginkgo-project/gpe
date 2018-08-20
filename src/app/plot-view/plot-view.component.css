@@ -1,10 +1,14 @@
 .code_viewer {
-  height: 300px;
-  max-height: 300px;
+  max-height: inherit;
+  height: inherit;
+  width: inherit;
   overflow-y: scroll;
-  border: 1px solid;
 }
 
 .code_viewer > code {
   white-space: pre-wrap;
+}
+
+mat-tab-group {
+  height: 100%;
 }

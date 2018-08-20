@@ -8,3 +8,7 @@ body {
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
 }
+
+.mat-tab-body-wrapper {
+  flex-grow: 1;
+}

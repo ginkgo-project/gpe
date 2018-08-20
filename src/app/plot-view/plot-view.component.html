@@ -1,20 +1,11 @@
-<h2>Showing {{script.name}} for <code>{{ data | property: 'name' }}</code></h2>
-<div class="plot">
-  <canvas #chartCanvas></canvas>
-</div>
-
-<button (click)="verbose = !verbose;">Toggle Verbose</button>
-<div *ngIf="verbose">
-  <div>
-    <h3>Data:</h3>
+<mat-tab-group>
+  <mat-tab label="Raw">
     <div class="code_viewer"><code>{{data | json}}</code></div>
-  </div>
-  <div>
-    <h3>Plot script {{script.name}} (<code>{{script.file}}</code>):</h3>
-    <div class="code_viewer"><code>{{script.code}}</code></div>
-  </div>
-  <div>
-    <h3>Plot data</h3>
+  </mat-tab>
+  <mat-tab label="Selected">
     <div class="code_viewer"><code>{{plotData | json}}</code></div>
-  </div>
-</div>
+  </mat-tab>
+  <mat-tab label="Plot">
+    <canvas #chartCanvas></canvas>
+  </mat-tab>
+</mat-tab-group>

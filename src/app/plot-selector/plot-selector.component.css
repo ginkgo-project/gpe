@@ -1,26 +1,9 @@
-label {
-  padding-top: 5px;
-  padding-bottom: 5px;
+.root {
   width: 100%;
-  display: block;
+  height: 100%;
 }
 
-input {
-  display: block;
-  float: left;
-  width: 80%;
-}
-
-button {
-  display: block;
-  width: 19%;
-}
-
-select {
+mat-form-field {
   width: 100%;
-}
-
-textarea {
-  width: 100%;
-  resize: none;
+  padding-bottom: 0.5em;
 }
