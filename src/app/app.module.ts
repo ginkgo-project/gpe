@@ -4,11 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  MatButtonModule,
   MatCardModule,
   MatDividerModule,
+  MatFormFieldModule,
   MatIconModule,
-  MatToolbarModule
+  MatInputModule,
+  MatSelectModule,
+  MatToolbarModule,
 } from '@angular/material';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -37,9 +43,13 @@ import { PropertyPipe } from './property.pipe';
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    MatButtonModule,
     MatCardModule,
     MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
+    MatSelectModule,
     MatToolbarModule
   ],
   providers: [

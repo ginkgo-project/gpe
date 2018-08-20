@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { MatSelect, MatSelectChange } from '@angular/material';
 
 
 import { Observable, of } from 'rxjs';
@@ -13,8 +20,9 @@ import { PlotDataService } from '../plot-data.service';
   styleUrls: ['./data-selector.component.css']
 })
 export class DataSelectorComponent implements OnInit {
-
   constructor(private dataService : PlotDataService) { }
+
+  @ViewChild('root_url') root_url;
 
   @Output() onDataUpdate = new EventEmitter<string[]>();
 
@@ -33,13 +41,13 @@ export class DataSelectorComponent implements OnInit {
     this.updateDataFileList();
   }
 
-  emitDataUpdate(dataList: HTMLSelectElement): void {
-    let data: string[] = Array.from(dataList.selectedOptions)
-      .map(option => option.value);
-    this.onDataUpdate.emit(data);
+  emitDataUpdate(dataList: MatSelectChange): void {
+    console.log(dataList.value);
+    // let data: string[] = Array.from(dataList.selected)
+    //   .map(option => option.value);
+    this.onDataUpdate.emit(dataList.value);
   }
 
-  error_message: string;
   data_file_url: string;
   data_file_list: string[];
 }

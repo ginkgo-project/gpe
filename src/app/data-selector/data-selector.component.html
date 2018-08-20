@@ -1,17 +1,28 @@
 <div>
-  <label>Plot data location:</label>
-  <input type="url" [(ngModel)]="data_file_url">
-  <button (click)="updateUrl();">Update</button>
-  <span class="error">{{error_message}}</span>
-</div>
-<div><label>
-    Data files (use <code>CTRL + &lt;click&gt;</code> to select multiple
-    files):
-</label></div>
-<div>
-  <select multiple #dataList (change)="emitDataUpdate(dataList)">
-    <option *ngFor="let data_file of data_file_list" value="{{data_file}}">
-      {{data_file}}
-    </option>
-  </select>
+  <mat-form-field>
+    <mat-label>Benchmark root URL</mat-label>
+    <input matInput id="root_url" name="root_url" type="url" required
+        #root_url=ngModel [(ngModel)]="data_file_url">
+    <button matSuffix mat-icon-button (click)="updateUrl();">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <mat-hint>
+      URL to a folder containing a <code>list.json</code> file.
+    </mat-hint>
+    <mat-error *ngIf="root_url.invalid">
+      URL is invalid.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select result files</mat-label>
+    <mat-select multiple #dataList (selectionChange)="emitDataUpdate($event)">
+      <mat-option *ngFor="let data_file of data_file_list"
+          value="{{data_file}}">
+        {{data_file}}
+      </mat-option>
+    </mat-select>
+    <mat-hint>
+      Result files to use in the next steps.
+    </mat-hint>
+  </mat-form-field>
 </div>

@@ -19,3 +19,7 @@ mat-card-header mat-icon {
   float: left;
   height: 30px;
 }
+
+app-data-selector {
+  padding: 0.5em;
+}
