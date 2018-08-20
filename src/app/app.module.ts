@@ -12,6 +12,7 @@ import { PlotConfigService } from './plot-config.service';
 import { PlotDataService } from './plot-data.service'
 import { KeysPipe } from './keys.pipe';
 import { PropertyPipe } from './property.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PropertyPipe } from './property.pipe';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     PlotConfigService,
