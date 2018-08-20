@@ -2,6 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -12,7 +14,6 @@ import { PlotConfigService } from './plot-config.service';
 import { PlotDataService } from './plot-data.service'
 import { KeysPipe } from './keys.pipe';
 import { PropertyPipe } from './property.pipe';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
