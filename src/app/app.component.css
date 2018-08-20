@@ -7,6 +7,12 @@ mat-card {
   margin: 0.5em;
 }
 
+mat-card-header mat-icon {
+  width: inherit;
+  height: inherit;
+  font-size: 40px;
+}
+
 .logo {
   padding-right: 5px;
   display: block;

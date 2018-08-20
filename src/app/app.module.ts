@@ -5,6 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatCardModule,
+  MatDividerModule,
+  MatIconModule,
   MatToolbarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -36,6 +38,8 @@ import { PropertyPipe } from './property.pipe';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatCardModule,
+    MatDividerModule,
+    MatIconModule,
     MatToolbarModule
   ],
   providers: [

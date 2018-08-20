@@ -8,6 +8,17 @@
 
   <div fxFlex fxLayout>
     <mat-card fxFlex>
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon aria-hidden="true">cloud_download</mat-icon>
+        </div>
+        <mat-card-title>
+          <strong>Step 1:</strong> Select benchmark results</mat-card-title>
+        <mat-card-subtitle>
+          Select raw benchmark results to import and view.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
       <app-data-selector
         (onDataUpdate)="plot_data = $event;"
       ></app-data-selector>
@@ -15,6 +26,21 @@
 
     <div fxFlex fxLayout="column">
       <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon aria-hidden="true">edit</mat-icon>
+          </div>
+          <mat-card-title>
+            <strong>Step 2:</strong> Transform results</mat-card-title>
+          <mat-card-subtitle>
+            Use <a href="https://docs.jsonata.org">JSONata</a> to
+            extract interesting parts of raw data.
+            For plotting, create a
+            <a href="https://www.chartjs.org/docs/latest/getting-started/usage.html">
+              Chart.js config object</a>.
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
         <app-plot-selector
           (onPlotUpdate)="plot_script = $event;"
           (onJsonataScriptUpdate)="jsonataScript = $event"
@@ -22,6 +48,17 @@
       </mat-card>
 
       <mat-card fxFlex>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon aria-hidden="true">show_chart</mat-icon>
+          </div>
+          <mat-card-title>
+            <strong>Step 3:</strong> View transformed results</mat-card-title>
+          <mat-card-subtitle>
+            View the resulting plot, or raw transformed data.
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
         <app-plot-view
           [data_files]="plot_data"
           [script_name]="plot_script"
