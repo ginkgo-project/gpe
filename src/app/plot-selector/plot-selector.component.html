@@ -15,7 +15,8 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Load example plot file</mat-label>
-    <mat-select #selectedScript (selectionChange)="emitPlotUpdate($event)">
+    <mat-select #selectedScript
+        (selectionChange)="updateTransformationScript($event.value)">
       <mat-option *ngFor="let plot_file of plot_file_list"
           value="{{plot_file}}">
         {{plot_file}}

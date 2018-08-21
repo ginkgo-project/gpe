@@ -41,10 +41,10 @@ export class PlotViewComponent implements OnInit {
         this.updateData();
       });
   }
-
   get data_files(): string[] {
     return this.rawData.map(file => file.name);
   }
+  rawData: any[] = DEFAULT_RAW_DATA;
 
   @Input()
   set transformProgram(program: jsonata.Expression) {
@@ -53,10 +53,10 @@ export class PlotViewComponent implements OnInit {
     }
     this.updateData();
   }
-
   get transformProgram(): jsonata.Expression {
     return this.transformProgram_;
   }
+  private transformProgram_: jsonata.Expression;
 
   updateData(): void {
     console.log("program");
@@ -91,15 +91,14 @@ export class PlotViewComponent implements OnInit {
     return obj ? JSON.parse(JSON.stringify(obj)) : obj;
   }
 
-  private editorOptions: any = {
+  editorOptions: any = {
     theme: 'vs',
     language: 'json',
     automaticLayout: true,
     readOnly: true
   };
 
-  rawData: any[] = DEFAULT_RAW_DATA;
-  private transformProgram_: jsonata.Expression;
-  private transformedData: any = [];
+  transformedData: any = [];
+
   private plot: Chart;
 }

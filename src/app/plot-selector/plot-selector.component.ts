@@ -37,6 +37,10 @@ export class PlotSelectorComponent implements OnInit {
     this.updatePlotFileList();
   }
 
+  updateTransformationScript(scriptName: string) {
+    console.log("TODO: update script " + scriptName);
+  }
+
   set transformExpression(expression: string) {
     this.transformExpression_ = expression;
     try {
@@ -46,17 +50,18 @@ export class PlotSelectorComponent implements OnInit {
       console.log(e);
     }
   }
-
   get transformExpression(): string {
     return this.transformExpression_;
   }
-
   private transformExpression_: string = DEFAULT_TRANSFORM_EXPRESSION;
-  private editorOptions: any = {
+
+  editorOptions: any = {
     theme: 'vs',
     language: 'json',
     automaticLayout: true
   };
-  private plot_file_url: string;
-  private plot_file_list: string[];
+
+  plot_file_url: string;
+
+  plot_file_list: string[];
 }
