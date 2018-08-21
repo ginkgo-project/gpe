@@ -23,73 +23,10 @@
     </mat-select>
     <mat-hint>Reset the code editor to the selected example plot.</mat-hint>
   </mat-form-field>
-  <mat-form-field fxFlex>
-    <mat-label>Transformation definition</mat-label>
-    <textarea matInput #jsonataScript>
-{
-  "type": "line",
-  "data": {
-    "labels": [1, 2, 3, 4, 5],
-    "datasets": [
-      {
-        "label": "Red line",
-        "data": [1, 4, 9, 16, 25],
-        "backgroundColor": "hsl(0,50%,60%)",
-        "borderColor": "hsl(0,50%,60%)",
-        "fill": false
-      },
-      {
-        "label": "Green line",
-        "data": [1, 2, 4, 8, 16],
-        "backgroundColor": "hsl(120, 50%, 60%)",
-        "borderColor": "hsl(120, 50%, 60%)",
-        "fill": false
-      }
-    ]
-  },
-  "options": {
-    "responsive": true,
-    "title": {
-      "display": true,
-      "text": "My Plot"
-    },
-    "tooltips": {
-      "mode": "index",
-      "intersect": true
-    },
-    "hover": {
-      "mode": "nearest",
-      "intersect": true
-    },
-    "scales": {
-      "xAxes": [
-        {
-          "display": true,
-          "scaleLabel": {
-            "display": true,
-            "labelString": "X-label"
-          }
-        }
-      ],
-      "yAxes": [
-        {
-          "display": true,
-          "scaleLabel": {
-            "display": true,
-            "labelString": "Y-label"
-          },
-          "ticks": {
-            "min": 0
-          }
-        }
-      ]
-    }
-  }
-}
-    </textarea>
-    <button matSuffix mat-button
-        (click)="emitJsonataScriptUpdate(jsonataScript)">
-      Update plot
-    </button>
-  </mat-form-field>
+  <div fxFlex class="code_viewer">
+    <ngx-monaco-editor
+      [options]="editorOptions"
+      [(ngModel)]="transformExpression">
+    </ngx-monaco-editor>
+  </div>
 </div>

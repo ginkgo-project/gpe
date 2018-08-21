@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 
 
+import * as jsonata from 'jsonata';
+
+
+import {
+  DEFAULT_TRANSFORM_EXPRESSION
+} from './default-form-values';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +15,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   plot_data: string[];
-  plot_script: string;
-  jsonataScript: string;
+  transformProgram: jsonata.Expression = jsonata(DEFAULT_TRANSFORM_EXPRESSION);
 }

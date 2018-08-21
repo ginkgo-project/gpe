@@ -3,9 +3,11 @@ import { Component, ElementRef, EventEmitter, Output, OnInit, ViewChild }
 
 
 import { Observable, of } from 'rxjs';
+import * as jsonata from 'jsonata';
 
 
 import { PlotConfigService } from '../plot-config.service';
+import { DEFAULT_TRANSFORM_EXPRESSION } from '../default-form-values';
 
 
 @Component({
@@ -17,8 +19,8 @@ export class PlotSelectorComponent implements OnInit {
 
   constructor(private configService: PlotConfigService) { }
 
-  @Output() onPlotUpdate = new EventEmitter<string>();
-  @Output() onJsonataScriptUpdate = new EventEmitter<string>();
+  @Output() onTransformProgramChange =
+    new EventEmitter<jsonata.Expression>();
 
   ngOnInit() {
     this.updatePlotFileList();
@@ -35,17 +37,26 @@ export class PlotSelectorComponent implements OnInit {
     this.updatePlotFileList();
   }
 
-  emitPlotUpdate(selectedScript: HTMLSelectElement): void {
-    let options = selectedScript.selectedOptions;
-    if (options.length && options.item(0).value) {
-      this.onPlotUpdate.emit(options.item(0).value);
+  set transformExpression(expression: string) {
+    this.transformExpression_ = expression;
+    try {
+      let transformProgram = jsonata(expression);
+      this.onTransformProgramChange.emit(transformProgram);
+    } catch (e) {
+      console.log(e);
     }
   }
 
-  emitJsonataScriptUpdate(jsonataScript: HTMLTextAreaElement): void {
-    this.onJsonataScriptUpdate.emit(jsonataScript.value);
+  get transformExpression(): string {
+    return this.transformExpression_;
   }
 
-  plot_file_url: string;
-  plot_file_list: string[];
+  private transformExpression_: string = DEFAULT_TRANSFORM_EXPRESSION;
+  private editorOptions: any = {
+    theme: 'vs',
+    language: 'json',
+    automaticLayout: true
+  };
+  private plot_file_url: string;
+  private plot_file_list: string[];
 }

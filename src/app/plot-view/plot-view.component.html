@@ -1,13 +1,17 @@
 <mat-tab-group>
   <mat-tab label="Raw">
     <div class="code_viewer">
-      <ngx-monaco-editor [options]="editorOptions" [ngModel]="data | json">
+      <ngx-monaco-editor
+        [options]="editorOptions"
+        [ngModel]="rawData | json">
       </ngx-monaco-editor>
     </div>
   </mat-tab>
   <mat-tab label="Selected">
     <div class="code_viewer">
-      <ngx-monaco-editor [options]="editorOptions" [ngModel]="plotData | json">
+      <ngx-monaco-editor
+        [options]="editorOptions"
+        [ngModel]="transformedData | json">
       </ngx-monaco-editor>
     </div>
   </mat-tab>

@@ -44,8 +44,7 @@
           <mat-divider></mat-divider>
         </div>
         <app-plot-selector fxFlex
-          (onPlotUpdate)="plot_script = $event;"
-          (onJsonataScriptUpdate)="jsonataScript = $event"
+          (onTransformProgramChange)="transformProgram = $event"
         ></app-plot-selector>
       </mat-card>
     </div>
@@ -66,8 +65,7 @@
       </div>
       <app-plot-view fxFlex
         [data_files]="plot_data"
-        [script_name]="plot_script"
-        [jsonataScript]="jsonataScript"
+        [transformProgram]="transformProgram"
       ></app-plot-view>
     </mat-card>
 </div>
