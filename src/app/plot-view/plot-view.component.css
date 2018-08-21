@@ -1,8 +1,10 @@
 .code_viewer {
-  max-height: inherit;
-  height: inherit;
-  width: inherit;
-  overflow-y: scroll;
+  height: 100%;
+  overflow: hidden;
+}
+
+ngx-monaco-editor {
+  height: 100%;
 }
 
 .code_viewer > code {

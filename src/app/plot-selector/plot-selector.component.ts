@@ -46,7 +46,6 @@ export class PlotSelectorComponent implements OnInit {
     this.onJsonataScriptUpdate.emit(jsonataScript.value);
   }
 
-  error_message: string;
   plot_file_url: string;
   plot_file_list: string[];
 }

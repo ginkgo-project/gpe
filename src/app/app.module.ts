@@ -19,6 +19,9 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+
+
 import { AppComponent } from './app.component';
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
@@ -52,7 +55,8 @@ import { PropertyPipe } from './property.pipe';
     MatInputModule,
     MatSelectModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MonacoEditorModule.forRoot()
   ],
   providers: [
     PlotConfigService,

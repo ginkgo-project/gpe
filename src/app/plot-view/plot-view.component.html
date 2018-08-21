@@ -1,9 +1,15 @@
 <mat-tab-group>
   <mat-tab label="Raw">
-    <div class="code_viewer"><code>{{data | json}}</code></div>
+    <div class="code_viewer">
+      <ngx-monaco-editor [options]="editorOptions" [ngModel]="data | json">
+      </ngx-monaco-editor>
+    </div>
   </mat-tab>
   <mat-tab label="Selected">
-    <div class="code_viewer"><code>{{plotData | json}}</code></div>
+    <div class="code_viewer">
+      <ngx-monaco-editor [options]="editorOptions" [ngModel]="plotData | json">
+      </ngx-monaco-editor>
+    </div>
   </mat-tab>
   <mat-tab label="Plot">
     <canvas #chartCanvas></canvas>

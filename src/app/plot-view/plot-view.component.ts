@@ -98,10 +98,16 @@ export class PlotViewComponent implements OnInit {
 
   json2chart(json: any): any { return json; }
 
+  editorOptions: any = {
+    theme: 'vs',
+    language: 'json',
+    automaticLayout: true,
+    readOnly: true
+  };
   data: DataFile[] = [];
   script: PlotScript = new PlotScript();
   jsonataScript_: string;
-  plotData: any;
+  plotData: any = [];
   plot: Chart;
   verbose: boolean = false;
 }
