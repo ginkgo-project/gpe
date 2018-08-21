@@ -56,7 +56,7 @@ import { PropertyPipe } from './property.pipe';
     MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot({baseUrl: "./assets"})
   ],
   providers: [
     PlotConfigService,
