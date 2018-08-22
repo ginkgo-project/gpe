@@ -8,6 +8,10 @@ mat-form-field {
   padding-bottom: 0.5em;
 }
 
+mat-expansion-panel {
+  margin-bottom: 0.3em;
+}
+
 .code_viewer {
   height: 100%;
   width: 100%;

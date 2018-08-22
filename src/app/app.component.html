@@ -8,28 +8,33 @@
 
   <div fxFlex fxLayout>
     <div fxFlex fxLayout="column">
-      <mat-card>
-        <mat-card-header>
-          <div mat-card-avatar>
-            <mat-icon aria-hidden="true">cloud_download</mat-icon>
-          </div>
-          <mat-card-title>
-            <strong>Step 1:</strong> Select benchmark results</mat-card-title>
-          <mat-card-subtitle>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon aria-hidden="true" color="primary">
+              cloud_download
+            </mat-icon>
+            <span class="offset">
+              <strong>Step 1:</strong> Select benchmark results
+            </span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span>
             Select raw benchmark results to import and view.
-          </mat-card-subtitle>
-        </mat-card-header>
+            </span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
         <mat-divider></mat-divider>
         <app-data-selector
           (onDataUpdate)="plot_data = $event;"
         ></app-data-selector>
-      </mat-card>
+      </mat-expansion-panel>
 
       <mat-card fxFlex fxLayout="column">
         <div class="force-no-flex">
           <mat-card-header>
             <div mat-card-avatar>
-              <mat-icon aria-hidden="true">edit</mat-icon>
+              <mat-icon aria-hidden="true" color="primary">edit</mat-icon>
             </div>
             <mat-card-title>
               <strong>Step 2:</strong> Transform results</mat-card-title>
@@ -53,7 +58,7 @@
       <div class="force-no-flex">
         <mat-card-header>
           <div mat-card-avatar>
-            <mat-icon aria-hidden="true">show_chart</mat-icon>
+            <mat-icon aria-hidden="true" color="primary">show_chart</mat-icon>
           </div>
           <mat-card-title>
             <strong>Step 3:</strong> View transformed results</mat-card-title>

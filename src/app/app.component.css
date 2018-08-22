@@ -3,8 +3,24 @@
   width: 100%;
 }
 
-mat-card {
+mat-card, mat-expansion-panel {
   margin: 0.5em;
+}
+
+.mat-expansion-panel-header-title {
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.mat-expansion-panel-header-description {
+  align-items: center;
+}
+
+mat-expansion-panel-header mat-icon {
+  width: inherit;
+  height: inherit;
+  font-size: 40px;
+  margin-right: 8px;
 }
 
 mat-card-header mat-icon {
