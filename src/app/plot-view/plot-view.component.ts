@@ -69,9 +69,12 @@ export class PlotViewComponent implements OnInit {
     let copy = this.copyObject(this.transformedData);
     try {
       this.plot = new Chart(ctx, copy);
+      this.plotError = null;
     } catch (e) {
-      console.log("Error generating chart:");
-      console.log(e);
+      this.plotError = e.message;
+      if (this.plot) {
+        this.plot.destroy();
+      }
     }
   }
 
@@ -87,6 +90,7 @@ export class PlotViewComponent implements OnInit {
   };
 
   transformedData: any = [];
+  plotError: string;
 
   private plot: Chart;
 }

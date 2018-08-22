@@ -17,5 +17,8 @@
   </mat-tab>
   <mat-tab label="Plot">
     <canvas #chartCanvas></canvas>
+    <mat-card *ngIf="plotError">
+      <code><pre>Error generating plot: {{plotError}}</pre></code>
+    </mat-card>
   </mat-tab>
 </mat-tab-group>
