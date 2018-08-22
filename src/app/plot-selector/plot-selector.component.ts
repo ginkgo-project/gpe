@@ -13,6 +13,13 @@ import {
 } from '../default-form-values';
 
 
+class LineInfo {
+  line: number;
+  startColumn: number;
+  endColumn: number;
+}
+
+
 @Component({
   selector: 'app-plot-selector',
   templateUrl: './plot-selector.component.html',
@@ -20,13 +27,23 @@ import {
 })
 export class PlotSelectorComponent implements OnInit {
 
-  constructor(private transformService: DataTransformService) { }
+  constructor(private transformService: DataTransformService) {
+  }
 
   @Output() onTransformProgramChange =
     new EventEmitter<jsonata.Expression>();
 
   ngOnInit() {
     this.updateTransformExpressionList();
+  }
+
+  onMonacoInit(editor: monaco.editor.IStandaloneCodeEditor): void {
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      allowComments: false,
+      schemas: [],
+      validate: false
+    });
+    this.editor = editor;
   }
 
   updateTransformExpressionList(): void {
@@ -62,9 +79,18 @@ export class PlotSelectorComponent implements OnInit {
     try {
       let transformProgram = jsonata(expression);
       this.onTransformProgramChange.emit(transformProgram);
+      monaco.editor.setModelMarkers(this.editor.getModel(), 'jsonata', []);
     } catch (e) {
-      console.log("TODO: report error in editor");
-      console.log(e);
+      let lineInfo = this.getLineInfoOf(e.position, e.token, expression);
+      monaco.editor.setModelMarkers(this.editor.getModel(), 'jsonata', [{
+        code: e.code,
+        startLineNumber: lineInfo.line,
+        endLineNumber: lineInfo.line,
+        startColumn: lineInfo.startColumn,
+        endColumn: lineInfo.endColumn,
+        message: e.message,
+        severity: monaco.MarkerSeverity.Error
+      }]);
     }
   }
   get transformExpression(): string {
@@ -72,11 +98,33 @@ export class PlotSelectorComponent implements OnInit {
   }
   private transformExpression_: string = DEFAULT_TRANSFORM_EXPRESSION;
 
+  private getLineInfoOf(position: number, token: string,
+                        code: string): LineInfo {
+    let line = 1;
+    let lineStart = 0;
+    while (true) {
+      let nextLineStart = code.indexOf('\n', lineStart + 1);
+      if (nextLineStart == -1 || nextLineStart >= position) {
+        break;
+      }
+      lineStart = nextLineStart;
+      ++line;
+    }
+    return {
+      line: line,
+      startColumn: position - lineStart - token.length,
+      endColumn: position - lineStart
+    };
+  }
+
+  editor: monaco.editor.IStandaloneCodeEditor;
+
   transformExpressionError: string;
 
   editorOptions: any = {
     theme: 'vs',
     language: 'json',
+    minimap: { enabled: false },
     automaticLayout: true
   };
 

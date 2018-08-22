@@ -48,7 +48,8 @@
   <div fxFlex class="code_viewer">
     <ngx-monaco-editor
       [options]="editorOptions"
-      [(ngModel)]="transformExpression">
+      [(ngModel)]="transformExpression"
+      (onInit)="onMonacoInit($event)">
     </ngx-monaco-editor>
   </div>
 </div>

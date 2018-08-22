@@ -53,17 +53,11 @@ export class PlotViewComponent implements OnInit {
   private transformProgram_: jsonata.Expression;
 
   updateData(): void {
-    console.log("program");
-    console.log(this.transformProgram);
-    console.log("input");
-    console.log(this.rawData);
     try {
       this.transformedData = this.transformProgram.evaluate(this.rawData);
     } catch(e) {
       this.transformedData = { "Runtime error" : e };
     }
-    console.log("output");
-    console.log(this.transformedData);
     this.redrawPlot();
   }
 

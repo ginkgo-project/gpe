@@ -77,3 +77,34 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+// Workaround for "undefined" error message in Monaco editor
+Promise.all = function (values: any): Promise<any> {
+    let resolve: (v: any) => void;
+    let reject: (v: any) => void;
+    let promise = new this((res, rej) => {
+      resolve = res;
+      reject = rej;
+    });
+    let count = 0;
+    let index = 0;
+    const resolvedValues: any[] = [];
+    for (let value of values) {
+      if (!(value && value.then)) {
+        value = this.resolve(value);
+      }
+      value.then(
+          ((index) => (value: any) => {
+            resolvedValues[index] = value;
+            count--;
+            if (!count) {
+                resolve(resolvedValues);
+            }
+          })(index),
+          reject);
+      count++;
+      index++;
+    }
+    if (!count) resolve(resolvedValues);
+    return promise;
+}

@@ -42,9 +42,6 @@ export class DataSelectorComponent implements OnInit {
   }
 
   emitDataUpdate(dataList: MatSelectChange): void {
-    console.log(dataList.value);
-    // let data: string[] = Array.from(dataList.selected)
-    //   .map(option => option.value);
     this.onDataUpdate.emit(dataList.value);
   }
 
