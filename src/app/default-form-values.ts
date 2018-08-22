@@ -14,8 +14,8 @@ export const DEFAULT_TRANSFORM_EXPRESSION: string = `{
       {
         "label": "Plotting complexity",
         "data": Involvement,
-        "backgroundColor": "hsl(0,50%,60%)",
-        "borderColor": "hsl(0,50%,60%)",
+        "backgroundColor": "hsl(38,93%,54%)",
+        "borderColor": "hsl(38,93%,54%)",
         "fill": false
       }
     ]
