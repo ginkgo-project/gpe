@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
 import { PlotViewComponent } from './plot-view/plot-view.component';
-import { PlotConfigService } from './plot-config.service';
+import { DataTransformService } from './data-transform.service';
 import { PlotDataService } from './plot-data.service'
 import { KeysPipe } from './keys.pipe';
 import { PropertyPipe } from './property.pipe';
@@ -59,7 +59,7 @@ import { PropertyPipe } from './property.pipe';
     MonacoEditorModule.forRoot({baseUrl: "./assets"})
   ],
   providers: [
-    PlotConfigService,
+    DataTransformService,
     PlotDataService
   ],
   bootstrap: [AppComponent]

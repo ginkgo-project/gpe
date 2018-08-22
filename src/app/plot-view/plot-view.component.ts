@@ -8,9 +8,7 @@ import * as jsonata from 'jsonata';
 
 import { KeysPipe } from '../keys.pipe';
 import { PropertyPipe } from '../property.pipe';
-import { PlotScript } from '../plot-script';
 import { DataFile } from '../data-file';
-import { PlotConfigService } from '../plot-config.service';
 import { PlotDataService } from '../plot-data.service';
 import { DEFAULT_RAW_DATA } from '../default-form-values';
 
@@ -22,13 +20,9 @@ import { DEFAULT_RAW_DATA } from '../default-form-values';
 export class PlotViewComponent implements OnInit {
   @ViewChild('chartCanvas') chartCanvas;
 
-  constructor(
-    private configService: PlotConfigService,
-    private dataService: PlotDataService
-  ) { }
+  constructor(private dataService: PlotDataService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   @Input()
   set data_files(data_files: string[]) {

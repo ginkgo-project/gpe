@@ -6,8 +6,11 @@ import { Observable, of } from 'rxjs';
 import * as jsonata from 'jsonata';
 
 
-import { PlotConfigService } from '../plot-config.service';
-import { DEFAULT_TRANSFORM_EXPRESSION } from '../default-form-values';
+import { DataTransformService } from '../data-transform.service';
+import {
+  DEFAULT_TRANSFORM_EXPRESSION,
+  DEFAULT_TRANSFORM_SCRIPT_URL
+} from '../default-form-values';
 
 
 @Component({
@@ -17,28 +20,41 @@ import { DEFAULT_TRANSFORM_EXPRESSION } from '../default-form-values';
 })
 export class PlotSelectorComponent implements OnInit {
 
-  constructor(private configService: PlotConfigService) { }
+  constructor(private transformService: DataTransformService) { }
 
   @Output() onTransformProgramChange =
     new EventEmitter<jsonata.Expression>();
 
   ngOnInit() {
-    this.updatePlotFileList();
-    this.plot_file_url = this.configService.url;
+    this.updateTransformExpressionList();
   }
 
-  updatePlotFileList(): void {
-    this.configService.getScriptList()
-      .subscribe(list => this.plot_file_list = list);
+  updateTransformExpressionList(): void {
+    this.transformService.getTransformExpressionNames(
+      this.transformExpressionUrl)
+    .subscribe(
+      list => {
+        this.transformExpressionListError = null;
+        this.transformExpressionList = list;
+      },
+      error => {
+        this.transformExpressionListError = error.message;
+      }
+    );
   }
 
-  updateUrl(): void {
-    this.configService.url = this.plot_file_url;
-    this.updatePlotFileList();
-  }
-
-  updateTransformationScript(scriptName: string) {
-    console.log("TODO: update script " + scriptName);
+  loadTransformExpression(scriptName: string) {
+    this.transformService.getTransformExpression(
+      this.transformExpressionUrl,
+      scriptName).subscribe(
+        expression => {
+          this.transformExpressionError = null;
+          this.transformExpression = expression.code;
+        },
+        error => {
+          this.transformExpressionError = error.message;
+        }
+      );
   }
 
   set transformExpression(expression: string) {
@@ -47,6 +63,7 @@ export class PlotSelectorComponent implements OnInit {
       let transformProgram = jsonata(expression);
       this.onTransformProgramChange.emit(transformProgram);
     } catch (e) {
+      console.log("TODO: report error in editor");
       console.log(e);
     }
   }
@@ -55,13 +72,16 @@ export class PlotSelectorComponent implements OnInit {
   }
   private transformExpression_: string = DEFAULT_TRANSFORM_EXPRESSION;
 
+  transformExpressionError: string;
+
   editorOptions: any = {
     theme: 'vs',
     language: 'json',
     automaticLayout: true
   };
 
-  plot_file_url: string;
+  transformExpressionUrl = DEFAULT_TRANSFORM_SCRIPT_URL;
 
-  plot_file_list: string[];
+  transformExpressionList: string[];
+  transformExpressionListError: string;
 }

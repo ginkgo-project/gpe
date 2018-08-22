@@ -1,3 +1,11 @@
+const DEFAULT_DATA_ROOT: string =
+  'https://raw.githubusercontent.com/ginkgo-project/ginkgo-data/master/';
+
+export const DEFAULT_BENCHMARK_RESULT_URL: string = DEFAULT_DATA_ROOT + 'data';
+
+export const DEFAULT_TRANSFORM_SCRIPT_URL: string =
+  DEFAULT_DATA_ROOT + 'plots';
+
 export const DEFAULT_TRANSFORM_EXPRESSION: string = `{
   "type": "line",
   "data": {
