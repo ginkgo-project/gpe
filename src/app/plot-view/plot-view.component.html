@@ -3,7 +3,7 @@
     <div class="code_viewer">
       <ngx-monaco-editor
         [options]="editorOptions"
-        [ngModel]="rawData | json">
+        [ngModel]="rawDataString">
       </ngx-monaco-editor>
     </div>
   </mat-tab>
@@ -11,7 +11,7 @@
     <div class="code_viewer">
       <ngx-monaco-editor
         [options]="editorOptions"
-        [ngModel]="transformedData | json">
+        [ngModel]="transformedDataString">
       </ngx-monaco-editor>
     </div>
   </mat-tab>

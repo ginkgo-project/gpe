@@ -12,6 +12,7 @@ import { DataFile } from '../data-file';
 import { PlotDataService } from '../plot-data.service';
 import { DEFAULT_RAW_DATA } from '../default-form-values';
 
+
 @Component({
   selector: 'app-plot-view',
   templateUrl: './plot-view.component.html',
@@ -20,7 +21,10 @@ import { DEFAULT_RAW_DATA } from '../default-form-values';
 export class PlotViewComponent implements OnInit {
   @ViewChild('chartCanvas') chartCanvas;
 
-  constructor(private dataService: PlotDataService) {}
+  constructor(private dataService: PlotDataService,
+              private jsonPipe: JsonPipe) {
+   this.rawDataString = this.jsonPipe.transform(this.rawData);
+  }
 
   ngOnInit() {}
 
@@ -32,6 +36,7 @@ export class PlotViewComponent implements OnInit {
     this.dataService.getDataFiles(data_files)
       .subscribe(rawData => {
         this.rawData = rawData;
+        this.rawDataString = this.jsonPipe.transform(this.rawData);
         this.updateData();
       });
   }
@@ -39,6 +44,7 @@ export class PlotViewComponent implements OnInit {
     return this.rawData.map(file => file.name);
   }
   rawData: any[] = DEFAULT_RAW_DATA;
+  rawDataString: string = "";
 
   @Input()
   set transformProgram(program: jsonata.Expression) {
@@ -58,6 +64,7 @@ export class PlotViewComponent implements OnInit {
     } catch(e) {
       this.transformedData = { "Runtime error" : e };
     }
+    this.transformedDataString = this.jsonPipe.transform(this.transformedData);
     this.redrawPlot();
   }
 
@@ -90,6 +97,7 @@ export class PlotViewComponent implements OnInit {
   };
 
   transformedData: any = [];
+  transformedDataString: string = "";
   plotError: string;
 
   private plot: Chart;
