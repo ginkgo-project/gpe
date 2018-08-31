@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Output,
@@ -17,7 +18,8 @@ import { PlotDataService } from '../plot-data.service';
 @Component({
   selector: 'app-data-selector',
   templateUrl: './data-selector.component.html',
-  styleUrls: ['./data-selector.component.css']
+  styleUrls: ['./data-selector.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataSelectorComponent implements OnInit {
   constructor(private dataService : PlotDataService) { }
