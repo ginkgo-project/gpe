@@ -1,27 +1,46 @@
-# GinkgoDataExplorer
+Ginkgo Benchmark Explorer
+-------------------------
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+Ginkgo benchmark explorer is a web application facilitating interactive
+analysis of performance data obtained from the
+[Ginkgo library](https://github.com/ginkgo-project/ginkgo). To see the
+application in action go to its
+[github page](https://ginkgo-project.github.io/ginkgo-benchmark-explorer). The
+benchmark data precessed by the application is regularly updated to reflect the
+latest version of the library via the CI system. This data can also be
+downloaded [here](https://github.com/ginkgo-project/ginkgo-data).
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ginkgo benchmark explorer is built using [Angular](https://angular.io) and uses
+[Angular Material Components](https://material.angular.io) to assemble its
+interface.  The editing / data viewing capabilities are powered by the [Monaco
+editor](https://microsoft.github.io/monaco-editor), and the plots generated
+using [Chart.js](https://www.chartjs.org). Scripting is enabled via
+[JSONata](http://jsonata.org).
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Bug reports and feature requests
 
-## Build
+Please use the
+[issue tracker](https://github.com/ginkgo-project/ginkgo-benchmark-explorer/issues)
+to report bugs and request new features.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Developers / Contributors
 
-## Running unit tests
+Refer to the (automatically generated) [ANGULAR-README](ANGULAR-README.md) for
+instructions about basic setup. For more details, refer to the [Angular
+documentation](https://angular.io/docs).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+If you want to contribute and have an idea about the features you would like to
+add, create a fork, implemnet your changes, and we'll be happy to accept your
+[pull request](https://github.com/ginkgo-project/ginkgo-benchmark-explorer/pulls).
+If you want to contribute because you think the project is cool, but don't know
+what exactly to work on, look into unresolved
+[issues](https://github.com/ginkgo-project/ginkgo-benchmark-explorer/issues),
+choose something from the list and proceed in the same way. You can also
+contact us and ask us about pending projects.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Licensing
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Ginkgo Benchmark Explorer is available under the [MIT license](LICENSE).
