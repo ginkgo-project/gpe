@@ -44,3 +44,6 @@ app-data-selector, app-plot-selector, app-plot-view {
   display: block !important;
 }
 
+.fill-space {
+  flex: 1 1 auto;
+}
