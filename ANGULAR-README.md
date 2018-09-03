@@ -1,4 +1,4 @@
-# Ginkgo Benchmark Explorer
+# Ginkgo Performance Explorer
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
 
