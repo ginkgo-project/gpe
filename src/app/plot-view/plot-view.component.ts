@@ -1,9 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material';
 
 
 import { Chart } from 'chart.js';
 import * as jsonata from 'jsonata';
+import { saveAs } from 'file-saver';
 
 
 import { KeysPipe } from '../keys.pipe';
@@ -15,6 +17,26 @@ import { DEFAULT_RAW_DATA } from '../default-form-values';
 
 Chart.defaults.global.animation.duration = 0;
 Chart.defaults.global.maintainAspectRatio = false;
+
+
+const EXPORT_HTML_TEMPLATE: string =`<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"> <title>GPE Chart</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<style>
+html, body, canvas { width: 100%; height: 100%; margin: 0; padding: 0; }
+html { overflow: hidden; }
+.chart-container { position: relative; width: calc(100% - 20px);
+  height: calc(100% - 20px); margin: 10px; padding: 0; }
+</style></head>
+<body><div class="chart-container"><canvas id="chart"></canvas></div></body>
+<script>
+Chart.defaults.global.animation.duration = 0;
+Chart.defaults.global.maintainAspectRatio = false;
+window.onload = function() { window.chart = new Chart(
+    document.getElementById("chart").getContext("2d"), %%config%%); };
+</script>
+</html>`;
 
 
 @Component({
@@ -87,6 +109,13 @@ export class PlotViewComponent implements OnInit {
         this.plot.destroy();
       }
     }
+  }
+
+  savePlotAsHTML(): void {
+    let data = new Blob(
+      [EXPORT_HTML_TEMPLATE.replace('%%config%%', this.transformedDataString)],
+      { type: "text/html;charset=utf-8" });
+    saveAs(data, "plot.html");
   }
 
   private copyObject(obj: any): any {

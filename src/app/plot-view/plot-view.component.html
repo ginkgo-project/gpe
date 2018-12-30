@@ -16,6 +16,11 @@
     </div>
   </mat-tab>
   <mat-tab label="Plot">
+    <div class="toolbar">
+      <button mat-stroked-button color="accent" (click)="savePlotAsHTML();">
+        HTML
+      </button>
+    </div>
     <canvas #chartCanvas></canvas>
     <mat-card *ngIf="plotError">
       <code><pre>Error generating plot: {{plotError}}</pre></code>
