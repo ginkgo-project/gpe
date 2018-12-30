@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material';
 import { Chart } from 'chart.js';
 import * as jsonata from 'jsonata';
 import { saveAs } from 'file-saver';
-const C2S = require("canvas2svg");  // XXX: no typings
+const C2S = require("canvas2svg-visjs");
 
 
 import { KeysPipe } from '../keys.pipe';
@@ -39,32 +39,6 @@ C2S.prototype.getAttribute = function(name) {
 
 C2S.prototype.addEventListener = function(t, l, opt) {};
 
-// the original version does not match single quotes in font names, only double
-// quotes
-C2S.prototype.__parseFont = function() {
-  var regex = /^\s*(?=(?:(?:[-a-z]+\s*){0,2}(italic|oblique))?)(?=(?:(?:[-a-z]+\s*){0,2}(small-caps))?)(?=(?:(?:[-a-z]+\s*){0,2}(bold(?:er)?|lighter|[1-9]00))?)(?:(?:normal|\1|\2|\3)\s*){0,3}((?:xx?-)?(?:small|large)|medium|smaller|larger|[.\d]+(?:\%|in|[cem]m|ex|p[ctx]))(?:\s*\/\s*(normal|[.\d]+(?:\%|in|[cem]m|ex|p[ctx])))?\s*([-,\"\'\sa-z]+?)\s*$/i;
-  var fontPart = regex.exec( this.font );
-  var data = {
-      style : fontPart[1] || 'normal',
-      size : fontPart[4] || '10px',
-      family : fontPart[6] || 'sans-serif',
-      weight: fontPart[3] || 'normal',
-      decoration : fontPart[2] || 'normal',
-      href : null
-  };
-
-  //canvas doesn't support underline natively, but we can pass this attribute
-  if(this.__fontUnderline === "underline") {
-      data.decoration = "underline";
-  }
-
-  //canvas also doesn't support linking, but we can pass this as well
-  if(this.__fontHref) {
-      data.href = this.__fontHref;
-  }
-
-  return data;
-}
 
 const EXPORT_HTML_TEMPLATE: string =`<!DOCTYPE html>
 <html lang="en">
