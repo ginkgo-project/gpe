@@ -139,6 +139,11 @@ export class PlotViewComponent implements OnInit {
     saveAs(data, "plot.html");
   }
 
+  savePlotAsPNG(): void {
+    let data = this.chartCanvas.nativeElement.toDataURL();
+    saveAs(data, "plot.png");
+  }
+
   savePlotAsSVG(): void {
     if (this.plotError) {
       return;
