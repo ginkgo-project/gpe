@@ -20,6 +20,9 @@
       <button mat-stroked-button color="accent" (click)="savePlotAsHTML();">
         HTML
       </button>
+      <button mat-stroked-button color="accent" (click)="savePlotAsSVG();">
+        SVG
+      </button>
     </div>
     <canvas #chartCanvas></canvas>
     <mat-card *ngIf="plotError">

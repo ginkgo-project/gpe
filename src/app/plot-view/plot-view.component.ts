@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material';
 import { Chart } from 'chart.js';
 import * as jsonata from 'jsonata';
 import { saveAs } from 'file-saver';
+const C2S = require("canvas2svg");  // XXX: no typings
 
 
 import { KeysPipe } from '../keys.pipe';
@@ -15,9 +16,55 @@ import { PlotDataService } from '../plot-data.service';
 import { DEFAULT_RAW_DATA } from '../default-form-values';
 
 
+// Use more reasonable default options ofr Chart.js
 Chart.defaults.global.animation.duration = 0;
 Chart.defaults.global.maintainAspectRatio = false;
 
+
+// Fix canvas2svg to work with Chart.js
+C2S.prototype.getContext = function(contextId) {
+  if (contextId=="2d" || contextId=="2D") {
+    return this;
+  }
+  return null;
+};
+
+C2S.prototype.style = function() {
+  return this.__canvas.style
+};
+
+C2S.prototype.getAttribute = function(name) {
+  return this[name];
+};
+
+C2S.prototype.addEventListener = function(t, l, opt) {};
+
+// the original version does not match single quotes in font names, only double
+// quotes
+C2S.prototype.__parseFont = function() {
+  var regex = /^\s*(?=(?:(?:[-a-z]+\s*){0,2}(italic|oblique))?)(?=(?:(?:[-a-z]+\s*){0,2}(small-caps))?)(?=(?:(?:[-a-z]+\s*){0,2}(bold(?:er)?|lighter|[1-9]00))?)(?:(?:normal|\1|\2|\3)\s*){0,3}((?:xx?-)?(?:small|large)|medium|smaller|larger|[.\d]+(?:\%|in|[cem]m|ex|p[ctx]))(?:\s*\/\s*(normal|[.\d]+(?:\%|in|[cem]m|ex|p[ctx])))?\s*([-,\"\'\sa-z]+?)\s*$/i;
+  var fontPart = regex.exec( this.font );
+  var data = {
+      style : fontPart[1] || 'normal',
+      size : fontPart[4] || '10px',
+      family : fontPart[6] || 'sans-serif',
+      weight: fontPart[3] || 'normal',
+      decoration : fontPart[2] || 'normal',
+      href : null
+  };
+
+  //canvas doesn't support underline natively, but we can pass this attribute
+  if(this.__fontUnderline === "underline") {
+      data.decoration = "underline";
+  }
+
+  //canvas also doesn't support linking, but we can pass this as well
+  if(this.__fontHref) {
+      data.href = this.__fontHref;
+  }
+
+  return data;
+}
 
 const EXPORT_HTML_TEMPLATE: string =`<!DOCTYPE html>
 <html lang="en">
@@ -118,8 +165,30 @@ export class PlotViewComponent implements OnInit {
     saveAs(data, "plot.html");
   }
 
+  savePlotAsSVG(): void {
+    if (this.plotError) {
+      return;
+    }
+    let data = new Blob(
+      [this.convertPlotDataToSvg(this.transformedData)],
+      { type: "image/svg+xml" });
+    saveAs(data, "plot.svg")
+  }
+
   private copyObject(obj: any): any {
     return obj ? JSON.parse(JSON.stringify(obj)) : obj;
+  }
+
+  private convertPlotDataToSvg(data: any): string {
+    data = Object.assign(data, {
+      options: { responsive: false, animation: false }
+    });
+    console.log(data);
+    let aspectRatio = data.options.aspectRatio || 2;
+    let height = 400;
+    let ctx = C2S(aspectRatio * height, height);
+    let chart = new Chart(ctx, data);
+    return ctx.getSerializedSvg(true);
   }
 
   editorOptions: any = {
