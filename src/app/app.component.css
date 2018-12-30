@@ -29,6 +29,11 @@ mat-card-header mat-icon {
   font-size: 40px;
 }
 
+mat-card-title {
+  font-size: 15px !important;
+  font-weight: 400;
+}
+
 .logo {
   padding-right: 5px;
   display: block;

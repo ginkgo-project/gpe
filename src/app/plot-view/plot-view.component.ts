@@ -13,6 +13,10 @@ import { PlotDataService } from '../plot-data.service';
 import { DEFAULT_RAW_DATA } from '../default-form-values';
 
 
+Chart.defaults.global.animation.duration = 0;
+Chart.defaults.global.maintainAspectRatio = false;
+
+
 @Component({
   selector: 'app-plot-view',
   templateUrl: './plot-view.component.html',
@@ -23,7 +27,7 @@ export class PlotViewComponent implements OnInit {
 
   constructor(private dataService: PlotDataService,
               private jsonPipe: JsonPipe) {
-   this.rawDataString = this.jsonPipe.transform(this.rawData);
+    this.rawDataString = this.jsonPipe.transform(this.rawData);
   }
 
   ngOnInit() {}
