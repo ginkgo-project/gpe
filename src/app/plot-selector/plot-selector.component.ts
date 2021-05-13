@@ -5,6 +5,7 @@ import { Component, ElementRef, EventEmitter, Output, OnInit, ViewChild }
 import { Observable, of } from 'rxjs';
 import * as jsonata from 'jsonata';
 
+import { MonacoEditorModule } from '@sentinel-one/ngx-monaco-editor';
 
 import { DataTransformService } from '../data-transform.service';
 import {

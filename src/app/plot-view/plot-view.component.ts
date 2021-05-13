@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { JsonPipe } from '@angular/common';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
 
 
 import { Chart } from 'chart.js';
@@ -17,8 +17,8 @@ import { DEFAULT_RAW_DATA } from '../default-form-values';
 
 
 // Use more reasonable default options ofr Chart.js
-Chart.defaults.global.animation.duration = 0;
-Chart.defaults.global.maintainAspectRatio = false;
+Chart.defaults.animation = false;
+Chart.defaults.maintainAspectRatio = false;
 
 
 // Fix canvas2svg to work with Chart.js
@@ -65,15 +65,17 @@ window.onload = function() { window.chart = new Chart(
   templateUrl: './plot-view.component.html',
   styleUrls: ['./plot-view.component.css']
 })
-export class PlotViewComponent implements OnInit {
-  @ViewChild('chartCanvas') chartCanvas;
+export class PlotViewComponent implements AfterViewInit {
+  @ViewChild('chartCanvas') private chartCanvas: ElementRef;
 
   constructor(private dataService: PlotDataService,
               private jsonPipe: JsonPipe) {
     this.rawDataString = this.jsonPipe.transform(this.rawData);
   }
 
-  ngOnInit() {}
+  ngAfterViewInit(): void {
+    this.redrawPlot();
+  }
 
   @Input()
   set data_files(data_files: string[]) {
@@ -119,10 +121,9 @@ export class PlotViewComponent implements OnInit {
     if (this.plot) {
       this.plot.destroy();
     }
-    let ctx = this.chartCanvas.nativeElement.getContext("2d");
     let copy = this.copyObject(this.transformedData);
     try {
-      this.plot = new Chart(ctx, copy);
+      this.plot = new Chart(this.chartCanvas.nativeElement, copy);
       this.plotError = null;
     } catch (e) {
       this.plotError = e.message;
@@ -181,5 +182,5 @@ export class PlotViewComponent implements OnInit {
   transformedDataString: string = "";
   plotError: string;
 
-  private plot: Chart;
+  private plot: any;
 }

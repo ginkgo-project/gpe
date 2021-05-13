@@ -11,6 +11,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+	    "allowedCommonJsDependencies": [
+	      "jsonata"
+	    ],
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -21,8 +24,8 @@
               "src/favicon.ico",
               {
                 "glob": "**/*",
-                "input": "node_modules/ngx-monaco-editor/assets/monaco",
-                "output": "/assets/monaco"
+                "input": "node_modules/@sentinel-one/ngx-monaco-editor/assets/monaco",
+                "output": "assets/monaco"
               }
             ],
             "styles": [
@@ -38,7 +41,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
