@@ -12,7 +12,7 @@ describe('DataTransformService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [DataTransformService],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(DataTransformService);
     httpMock = TestBed.get(HttpTestingController);

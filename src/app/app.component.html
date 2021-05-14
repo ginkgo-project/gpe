@@ -1,18 +1,14 @@
 <div class="root" fxLayout="column">
   <mat-toolbar color="primary">
     <span>
-      <img class="logo" alt="Ginkgo" src="assets/logo.png">
-      <span>
-      Performance Explorer
-      </span>
+      <img class="logo" alt="Ginkgo" src="assets/logo.png" />
+      <span> Performance Explorer </span>
     </span>
     <span class="fill-space"></span>
-    <a mat-icon-button href="https://github.com/ginkgo-project/gpe/wiki"
-       target="_blank">
+    <a mat-icon-button href="https://github.com/ginkgo-project/gpe/wiki" target="_blank">
       <mat-icon>help</mat-icon>
     </a>
-    <a mat-icon-button href="https://github.com/ginkgo-project/gpe"
-       target="_blank">
+    <a mat-icon-button href="https://github.com/ginkgo-project/gpe" target="_blank">
       <mat-icon svgIcon="github"></mat-icon>
     </a>
   </mat-toolbar>
@@ -22,23 +18,15 @@
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <mat-icon aria-hidden="true" color="accent">
-              cloud_download
-            </mat-icon>
-            <span class="offset">
-              <strong>Step 1:</strong> Select benchmark results
-            </span>
+            <mat-icon aria-hidden="true" color="accent"> cloud_download </mat-icon>
+            <span class="offset"> <strong>Step 1:</strong> Select benchmark results </span>
           </mat-panel-title>
           <mat-panel-description>
-            <span>
-            Select raw benchmark results to import and view.
-            </span>
+            <span> Select raw benchmark results to import and view. </span>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-divider></mat-divider>
-        <app-data-selector
-          (onDataUpdate)="plot_data = $event;"
-        ></app-data-selector>
+        <app-data-selector (dataUpdate)="plot_data = $event"></app-data-selector>
       </mat-expansion-panel>
 
       <mat-card fxFlex fxLayout="column">
@@ -47,22 +35,23 @@
             <div mat-card-avatar>
               <mat-icon aria-hidden="true" color="accent">edit</mat-icon>
             </div>
-            <mat-card-title>
-              <strong>Step 2:</strong> Transform results</mat-card-title>
+            <mat-card-title> <strong>Step 2:</strong> Transform results</mat-card-title>
             <mat-card-subtitle>
               For plotting, create a
-              <a target="_blank"
-                 href="https://www.chartjs.org/docs/latest/getting-started/usage.html">
-                Chart.js config object</a>.
-              Use
-              <a target="_blank" href="https://docs.jsonata.org">JSONata</a> to
-              extract interesting parts of raw data.
+              <a
+                target="_blank"
+                href="https://www.chartjs.org/docs/latest/getting-started/usage.html"
+              >
+                Chart.js config object</a
+              >. Use <a target="_blank" href="https://docs.jsonata.org">JSONata</a> to extract
+              interesting parts of raw data.
             </mat-card-subtitle>
           </mat-card-header>
           <mat-divider></mat-divider>
         </div>
-        <app-plot-selector fxFlex
-          (onTransformProgramChange)="transformProgram = $event"
+        <app-plot-selector
+          fxFlex
+          (transformProgramChange)="transformProgram = $event"
         ></app-plot-selector>
       </mat-card>
     </div>
@@ -73,17 +62,16 @@
           <div mat-card-avatar>
             <mat-icon aria-hidden="true" color="accent">show_chart</mat-icon>
           </div>
-          <mat-card-title>
-            <strong>Step 3:</strong> View transformed results</mat-card-title>
-          <mat-card-subtitle>
-            View the resulting plot, or raw transformed data.
-          </mat-card-subtitle>
+          <mat-card-title> <strong>Step 3:</strong> View transformed results</mat-card-title>
+          <mat-card-subtitle> View the resulting plot, or raw transformed data. </mat-card-subtitle>
         </mat-card-header>
         <mat-divider></mat-divider>
       </div>
-      <app-plot-view fxFlex
+      <app-plot-view
+        fxFlex
         [data_files]="plot_data"
         [transformProgram]="transformProgram"
       ></app-plot-view>
     </mat-card>
+  </div>
 </div>

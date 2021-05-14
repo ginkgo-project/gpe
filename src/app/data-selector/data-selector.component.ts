@@ -4,29 +4,24 @@ import {
   EventEmitter,
   Output,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { MatSelect, MatSelectChange } from '@angular/material/select';
-
-
-import { Observable, of } from 'rxjs';
-
+import { MatSelectChange } from '@angular/material/select';
 
 import { PlotDataService } from '../plot-data.service';
-
 
 @Component({
   selector: 'app-data-selector',
   templateUrl: './data-selector.component.html',
   styleUrls: ['./data-selector.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataSelectorComponent implements OnInit {
-  constructor(private dataService : PlotDataService) { }
+  constructor(private dataService: PlotDataService) {}
 
   @ViewChild('root_url') root_url;
 
-  @Output() onDataUpdate = new EventEmitter<string[]>();
+  @Output() dataUpdate = new EventEmitter<string[]>();
 
   ngOnInit() {
     this.updateDataFileList();
@@ -34,8 +29,7 @@ export class DataSelectorComponent implements OnInit {
   }
 
   updateDataFileList(): void {
-    this.dataService.getFileList()
-      .subscribe(list => this.data_file_list = list);
+    this.dataService.getFileList().subscribe((list) => (this.data_file_list = list));
   }
 
   updateUrl(): void {
@@ -44,9 +38,10 @@ export class DataSelectorComponent implements OnInit {
   }
 
   emitDataUpdate(dataList: MatSelectChange): void {
-    this.onDataUpdate.emit(dataList.value);
+    this.dataUpdate.emit(dataList.value);
   }
 
   data_file_url: string;
+
   data_file_list: string[];
 }

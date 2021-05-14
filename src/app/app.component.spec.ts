@@ -16,16 +16,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MonacoEditorModule, NgxMonacoEditorConfig } from '@sentinel-one/ngx-monaco-editor';
+import { MonacoEditorModule } from '@sentinel-one/ngx-monaco-editor';
 
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
 import { PlotViewComponent } from './plot-view/plot-view.component';
 import { DataTransformService } from './data-transform.service';
-import { PlotDataService } from './plot-data.service'
+import { PlotDataService } from './plot-data.service';
 import { KeysPipe } from './keys.pipe';
 import { PropertyPipe } from './property.pipe';
-
 
 import { AppComponent } from './app.component';
 
@@ -41,7 +40,7 @@ describe('AppComponent', () => {
         PlotSelectorComponent,
         PlotViewComponent,
         KeysPipe,
-        PropertyPipe
+        PropertyPipe,
       ],
       imports: [
         BrowserModule,
@@ -59,15 +58,10 @@ describe('AppComponent', () => {
         MatSelectModule,
         MatTabsModule,
         MatToolbarModule,
-        MonacoEditorModule.forRoot()
+        MonacoEditorModule.forRoot(),
       ],
-      providers: [
-      	DataTransformService,
-        PlotDataService,
-        JsonPipe
-      ]
-    })
-    .compileComponents();
+      providers: [DataTransformService, PlotDataService, JsonPipe],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -81,11 +75,13 @@ describe('AppComponent', () => {
 
   it(`should have as title 'Performance Explorer'`, () => {
     const elt = fixture.nativeElement.querySelector('mat-toolbar span span');
+
     expect(elt.innerHTML.trim()).toEqual('Performance Explorer');
   });
 
   it('should have a data-selector component', () => {
     const elt = fixture.nativeElement.querySelector('app-data-selector');
+
     expect(elt).not.toBeNull();
   });
 });

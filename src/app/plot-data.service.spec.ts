@@ -12,7 +12,7 @@ describe('PlotDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [PlotDataService],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(PlotDataService);
     httpMock = TestBed.get(HttpTestingController);

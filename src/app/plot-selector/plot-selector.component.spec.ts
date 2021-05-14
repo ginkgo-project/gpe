@@ -6,43 +6,36 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MonacoEditorModule, NgxMonacoEditorConfig } from '@sentinel-one/ngx-monaco-editor';
+import { MonacoEditorModule } from '@sentinel-one/ngx-monaco-editor';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DataTransformService } from '../data-transform.service';
 
-
 import { PlotSelectorComponent } from './plot-selector.component';
-
 
 interface TransformExpression {
   name: string;
   file: string;
   code: string;
-};
+}
 
-let stubTransformExpression : TransformExpression = {
+const stubTransformExpression: TransformExpression = {
   name: 'test',
   file: 'test.txt',
-  code: '123'
+  code: '123',
 };
 
-let stubExpressionNames : string[] = [
-  'string1', 'string2'
-];
+const stubExpressionNames: string[] = ['string1', 'string2'];
 
 class FakeDataTransformService {
-  getTransformExpression(url: string, expressionName: string):
-      Observable<TransformExpression> {
+  getTransformExpression(): Observable<TransformExpression> {
     return of(stubTransformExpression);
   }
 
-  getTransformExpressionNames(url: string): Observable<string[]> {
+  getTransformExpressionNames(): Observable<string[]> {
     return of(stubExpressionNames);
   }
-
 }
-
 
 describe('PlotSelectorComponent', () => {
   let component: PlotSelectorComponent;
@@ -50,22 +43,19 @@ describe('PlotSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlotSelectorComponent ],
+      declarations: [PlotSelectorComponent],
       imports: [
         FormsModule,
-	MatExpansionModule,
+        MatExpansionModule,
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatSelectModule,
-	MonacoEditorModule.forRoot(),
-	NoopAnimationsModule
+        MonacoEditorModule.forRoot(),
+        NoopAnimationsModule,
       ],
-      providers: [
-	{ provide: DataTransformService, useClass: FakeDataTransformService }
-      ]
-    })
-    .compileComponents();
+      providers: [{ provide: DataTransformService, useClass: FakeDataTransformService }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

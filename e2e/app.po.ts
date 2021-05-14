@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class AppPage {
+class AppPage {
   navigateTo() {
     return browser.get('/');
   }
@@ -9,3 +9,4 @@ export class AppPage {
     return element(by.css('app-root h1')).getText();
   }
 }
+export default AppPage;
