@@ -4,24 +4,21 @@ import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatSelectModule,
-  MatTabsModule,
-  MatToolbarModule,
-} from '@angular/material';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
-import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { MonacoEditorModule, NgxMonacoEditorConfig } from '@sentinel-one/ngx-monaco-editor';
 
 
 import { AppComponent } from './app.component';
@@ -33,6 +30,10 @@ import { PlotDataService } from './plot-data.service'
 import { KeysPipe } from './keys.pipe';
 import { PropertyPipe } from './property.pipe';
 
+const monacoConfig: NgxMonacoEditorConfig = {
+    baseUrl: 'assets',
+    defaultOptions: { scrolBeyondLastLine: false }
+};
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { PropertyPipe } from './property.pipe';
     MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
-    MonacoEditorModule.forRoot({baseUrl: "./assets"})
+    MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers: [
     DataTransformService,
