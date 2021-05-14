@@ -6,7 +6,7 @@ import { Observable, of, merge } from 'rxjs';
 import { tap, map, toArray } from 'rxjs/operators';
 
 
-import { DataFile} from './data-file';
+import { DataFile } from './data-file';
 
 
 @Injectable()

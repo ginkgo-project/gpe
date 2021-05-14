@@ -1,6 +1,48 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable, of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MonacoEditorModule, NgxMonacoEditorConfig } from '@sentinel-one/ngx-monaco-editor';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { DataTransformService } from '../data-transform.service';
+
 
 import { PlotSelectorComponent } from './plot-selector.component';
+
+
+interface TransformExpression {
+  name: string;
+  file: string;
+  code: string;
+};
+
+let stubTransformExpression : TransformExpression = {
+  name: 'test',
+  file: 'test.txt',
+  code: '123'
+};
+
+let stubExpressionNames : string[] = [
+  'string1', 'string2'
+];
+
+class FakeDataTransformService {
+  getTransformExpression(url: string, expressionName: string):
+      Observable<TransformExpression> {
+    return of(stubTransformExpression);
+  }
+
+  getTransformExpressionNames(url: string): Observable<string[]> {
+    return of(stubExpressionNames);
+  }
+
+}
+
 
 describe('PlotSelectorComponent', () => {
   let component: PlotSelectorComponent;
@@ -8,7 +50,20 @@ describe('PlotSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlotSelectorComponent ]
+      declarations: [ PlotSelectorComponent ],
+      imports: [
+        FormsModule,
+	MatExpansionModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+	MonacoEditorModule.forRoot(),
+	NoopAnimationsModule
+      ],
+      providers: [
+	{ provide: DataTransformService, useClass: FakeDataTransformService }
+      ]
     })
     .compileComponents();
   }));
@@ -19,7 +74,7 @@ describe('PlotSelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });
