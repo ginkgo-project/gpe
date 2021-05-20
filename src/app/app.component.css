@@ -3,7 +3,8 @@
   width: 100%;
 }
 
-mat-card, mat-expansion-panel {
+mat-card,
+mat-expansion-panel {
   margin: 0.5em;
 }
 
@@ -41,7 +42,9 @@ mat-card-title {
   height: 30px;
 }
 
-app-data-selector, app-plot-selector, app-plot-view {
+app-data-selector,
+app-plot-selector,
+app-plot-view {
   padding: 0.5em;
 }
 

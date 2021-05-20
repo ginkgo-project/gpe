@@ -17,22 +17,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 import { MonacoEditorModule, NgxMonacoEditorConfig } from '@sentinel-one/ngx-monaco-editor';
-
 
 import { AppComponent } from './app.component';
 import { DataSelectorComponent } from './data-selector/data-selector.component';
 import { PlotSelectorComponent } from './plot-selector/plot-selector.component';
 import { PlotViewComponent } from './plot-view/plot-view.component';
 import { DataTransformService } from './data-transform.service';
-import { PlotDataService } from './plot-data.service'
+import { PlotDataService } from './plot-data.service';
 import { KeysPipe } from './keys.pipe';
 import { PropertyPipe } from './property.pipe';
 
 const monacoConfig: NgxMonacoEditorConfig = {
-    baseUrl: 'assets',
-    defaultOptions: { scrolBeyondLastLine: false }
+  baseUrl: 'assets',
+  defaultOptions: { scrolBeyondLastLine: false },
 };
 
 @NgModule({
@@ -42,7 +40,7 @@ const monacoConfig: NgxMonacoEditorConfig = {
     PlotSelectorComponent,
     PlotViewComponent,
     KeysPipe,
-    PropertyPipe
+    PropertyPipe,
   ],
   imports: [
     BrowserModule,
@@ -60,13 +58,9 @@ const monacoConfig: NgxMonacoEditorConfig = {
     MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
-    MonacoEditorModule.forRoot(monacoConfig)
+    MonacoEditorModule.forRoot(monacoConfig),
   ],
-  providers: [
-    DataTransformService,
-    PlotDataService,
-    JsonPipe
-  ],
-  bootstrap: [AppComponent]
+  providers: [DataTransformService, PlotDataService, JsonPipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
